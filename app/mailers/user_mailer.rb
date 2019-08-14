@@ -22,7 +22,7 @@ class UserMailer < ApplicationMailer
     @url  = 'http://monsite.fr/login' 
 
     # c'est cet appel à mail() qui permet d'envoyer l’e-mail en définissant destinataire et sujet.
-    mail(to: @admin.email, subject: "#{@participant.name} a rejoint votre évenement #{@event.title} !") 
+    mail(to: @admin.email, subject: "#{@participant.first_name} #{@participant.last_name} a rejoint votre évenement #{@event.title} !") 
   end
 end
 
