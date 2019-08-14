@@ -1,29 +1,24 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 User.destroy_all
 Event.destroy_all
 Attendance.destroy_all
 
-10.times do 
-  first_name = Faker::Name.first_name
-  last_name = Faker::Name.last_name
-	description = Faker::TvShows::SouthPark.quote
-	User.create(first_name: first_name, last_name: last_name, email: "#{first_name.downcase}.#{last_name.downcase}@yopmail.com", description: description, encrypted_password: Faker::TvShows::SouthPark.quote)
-end
-
 #Création de pierre michel
-email = "julien.michel@yopmail.com"
-description = "Salut, moi c'est Julien Michel, je suis un User de test"
-first_name = "Julien"
+email = "pierre.michel@yopmail.com"
+description = "Salut, moi c'est Pierre Michel, je suis un User de test"
+first_name = "Pierre"
 last_name = "Michel"
 password = "azerty" #password très safe, je recommande vivement
-User.create(email:email, description:description, first_name:first_name, last_name:last_name, encrypted_password: password)
+User.create(email:email, description:description, first_name:first_name, last_name:last_name, password: password, password_confirmation: password)
+
+#Création de users
+10.times do
+	email = Faker::Internet.email
+	description = Faker::TvShows::Community.quotes
+	first_name = Faker::Name.first_name
+	last_name = Faker::Name.last_name
+	password = "azerty" #password très safe, je recommande vivement
+	User.create(email:email, description:description, first_name:first_name, last_name:last_name, password: password, password_confirmation: password)
+end
 
 #Créations d'events
 15.times do
@@ -44,9 +39,9 @@ User.create(email:email, description:description, first_name:first_name, last_na
 end
 
 # Création d'attendances
-20.times do
-  stripe_customer_id = ""
-  participant = User.all.sample
-  event = Event.all.sample
-  Attendance.create(stripe_customer_id: stripe_customer_id, participant: participant, event: event)
+	20.times do
+    stripe_customer_id = ""
+    participant = User.all.sample
+    event = Event.all.sample
+  	Attendance.create(stripe_customer_id: stripe_customer_id, participant: participant, event: event)
 end

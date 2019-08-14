@@ -1,3 +1,64 @@
-// Place all the styles related to the Events controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.jumbotron {
+  background-color: #fff !important;
+  padding-top: 48px;
+  padding-bottom: 48px;
+  height: 397px !important;
+  background-position: center;
+  width: 100%;
+}
+.jumbotron .container {
+  max-width: 100%;
+}
+
+.event-card
+{
+min-height: 300px;
+  margin-bottom: 2em;
+}
+
+.event-card:hover 
+{
+  box-shadow: 0 0 30px;
+}
+
+.card-events
+{
+margin: 2em 5em 2em 5em;
+}
+
+.price
+{
+  top: -5px;
+  right: -5px;
+  background-color: rgb(41,135,255);
+  height: 3em;
+  width: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.date
+{
+  text-align: center;
+  top: 0px;
+  right: 50px;
+  height: 3.5em;
+  width: 3.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8em;
+}
+
+.month
+{
+  top: 0px;
+  right: 0px;
+  
+}
+.day_of_month
+{
+  top: 20px;
+  right: 00px;
+}

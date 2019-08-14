@@ -1,1 +1,17 @@
-Bonjour !
+
+<div class="jumbotron" style="background-image: url(https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?cs=srgb&dl=audience-band-concert-1105666.jpg&fm=jpg); background-size: 100%;">
+
+  <div class="container">
+    <h1 class="display-3" style="color: white;">Vivez le meilleur!</h1>
+    <p style="color: white;">Ne ratez plus un évenement près de chez vous.</p>
+  </div>
+</div>
+
+<section class="card-events">
+  <div class="row">
+    <% Event.all.each do |event| %>
+      <%= render 'shared/event-card', event: event %>
+    <% end %>
+  </div>
+
+</section>

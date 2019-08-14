@@ -1,0 +1,43 @@
+<div class="jumbotron" style="background-image: url(https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?cs=srgb&dl=audience-band-concert-1105666.jpg&fm=jpg); background-size: 100%;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+        <section class="card frame">
+          <div class="card-body">
+            <h5 class="card-title">
+              <strong><%= @event.title %></strong>
+            </h5>
+
+            <p><i class="fas fa-map-marker-alt text-warning"></i>  <%= @event.location %></p>
+            <p>Créé par <em><%= @event.admin.name %></em> <%= @event.admin.email %> </p>
+            <p><%= @event.participants.count %> personnes participent à cet évenement </p>
+            <p>
+              début : <%= @event.convert_start_date %>
+            </p>
+            <p>
+              fin : <%= @event.end_date %>
+            </p>
+
+            <p class="price rounded-circle position-absolute border border-info text-light"><strong><%= @event.price %>€</strong></p>
+            <aside class="date position-absolute">
+                  <p class="month text-warning position-absolute w-100"><strong><%= @event.get_month %></strong></p>
+                  <p class="day_of_month position-absolute w-100"><%= @event.start_date.day %></p>
+            </aside>
+            
+
+            <div class="container bg-light border border-info rounded">
+              <p><strong>Description:</strong></p>
+              <p><%= @event.description %></p>
+            </div>
+
+
+
+            <%= link_to 'Edit', edit_event_path(@event) %> |
+            <%= link_to 'Back', events_path %>
+
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

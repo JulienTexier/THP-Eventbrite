@@ -1,0 +1,45 @@
+<br>
+<section class="card-events">
+  <h2>Mes infos</h2>
+  <div class="row">
+    <div class="col">
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @user.description %>
+    </p>
+
+    <p>
+      <strong>First name:</strong>
+      <%= @user.first_name %>
+    </p>
+
+    <p>
+      <strong>Last name:</strong>
+      <%= @user.last_name %>
+    </p>
+
+    <%= link_to 'Edit', edit_user_path(@user) %> |
+
+
+      <%= link_to "Edit email / password", edit_user_registration_path %>
+
+
+  </div>
+  </div>
+</section>
+<br>
+
+
+
+<section class="card-events">
+  <h2>Mes évenements</h2>
+  <div class="row">
+    <% @user.organized_events.each do |event| %>
+      <%= render 'shared/event-card', event: event %>
+    <% end %>
+  </div>

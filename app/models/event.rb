@@ -1,26 +1,61 @@
 class Event < ApplicationRecord
   validates :start_date, presence: true
-  validate :start_date_cannot_be_in_the_past
+  validate :in_the_future?
   validates :duration, presence: true, numericality: { only_integer: true, greater_than: 0}
-  validate :is_multiple_of_5
+  validate :multiple_of_5?
   validates :title, presence: true, length: { in: 5..140 }
   validates :description, presence: true, length: { in: 20..1000 }
   validates :price, presence: true, numericality: { only_integer: true,  in: 1..1000}
   validates :location, presence: true
 
-  def start_date_cannot_be_in_the_past
-    if start_date.present? && start_date < Date.today
-      errors.add(:start_date, "can't be in the past")
-    end
-  end
-  
-  def is_multiple_of_5
-    if duration.present? && duration % 5 != 0
-      errors.add(:duration, "must be multiple of 5")
-    end
-  end
-  
+    
   belongs_to :admin, class_name: "User"
   has_many :attendances
-  has_many :users, through: :attendances
+  has_many :participants, through: :attendances
+
+  def end_date
+    date = self.start_date + self.duration*60
+    return date.strftime("%d/%m/%y à %H:%M")
+  end
+
+  def get_month
+    month = ["", "JANV.", "FEV.", "MARS", "AVR.", "MAI", "JUIN", "JUIL.", "AOUT", "SEPT.", "OCT.", "NOV.", "DEC."]
+    return month[self.start_date.month]
+  end
+
+  def short_description
+    if self.description.length < 80
+      return self.description
+    else
+      return self.description[0..80] + "..."
+    end
+  end
+
+  def convert_start_date
+    return self.start_date.strftime("%d/%m/%y à %H:%M")
+  end
+
+  def can_participate?(user)
+    return !(user == nil || user == self.admin || self.participants.include?(user))
+  end
+
+  def participate?(user)
+    return self.participants.include?(user)
+  end
+
+  private
+
+  def multiple_of_5?
+  	#return self.duration % 5 == 0
+  	if self.duration.present? && self.duration % 5 != 0
+        errors.add(:duration, "must be multiple of 5")
+    end
+  end
+
+  def in_the_future?
+  	#return self.start_date > Time.now
+  	if self.start_date.present? && self.start_date < Time.now
+        errors.add(:start_date, "can't be in the past")
+    end
+  end
 end
